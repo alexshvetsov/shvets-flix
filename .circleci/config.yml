@@ -86,11 +86,11 @@ jobs:
       - run:
           name: Deploy to AWS S3
           command: |
-            aws configure set preview.cloudfront
-            if ["${CURRENT_BRANCH}" === "master"]
+            aws configure set preview.cloudfront true
+            if [ "${CURRENT_BRANCH}" === "master" ]
             then
               aws cloudfront create-invalidation --distribution-id ${PRODUCTION_DESTRIBUTION} --paths /\*
-            elif ["${CURRENT_BRANCH}" === "staging"]
+            elif [ "${CURRENT_BRANCH}" === "staging" ]
             then
               aws cloudfront create-invalidation --distribution-id ${STAGING_DISTRIBTUION} --paths /\*
             else
