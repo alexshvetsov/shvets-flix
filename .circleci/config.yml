@@ -35,7 +35,7 @@ jobs:
           name: Installing AWS CLI
           working_directory: /
           command: | 
-            sudo apt-get -y -qq update
+            sudo app-get -y -qq update
             sudo app-get install -y awscli
             sudo app-get install -y python-pip python-dev build-essential
       - run:
@@ -43,7 +43,7 @@ jobs:
           command: |
             npm install
             npm run build
-            cd build 
+            cd build ap
             zip ../build.zip -r * .[^.]*
             echo "Build successful"
       - run:
@@ -72,7 +72,7 @@ jobs:
           name: Installing AWS CLI
           working_directory: /
           command: | 
-            sudo apt-get -y -qq update
+            sudo app-get -y -qq update
             sudo app-get install -y awscli
             sudo app-get install -y python-pip python-dev build-essential
       - run:
