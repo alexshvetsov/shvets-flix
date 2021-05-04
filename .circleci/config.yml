@@ -43,7 +43,7 @@ jobs:
           command: |
             npm install
             npm run build
-            cd build ap
+            cd build
             zip ../build.zip -r * .[^.]*
             echo "Build successful"
       - run:
