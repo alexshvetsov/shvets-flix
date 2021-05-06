@@ -17,7 +17,7 @@ aliases:
   - &save-cache
     save_cache:
       paths:
-        -node_modules
+        - node_modules
       key: app-{{ checksum "package.json" }}
   - &restore-cache
     restore_cache:
@@ -61,7 +61,7 @@ jobs:
       - *restore-cache
       - run:
           name: Run linting
-          command: npm install npm run lint
+          command: npm run lint
   
   deploy-to-aws-s3:
     executor: app-executor
