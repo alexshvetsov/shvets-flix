@@ -63,7 +63,7 @@ jobs:
           name: run linting
           command: npm install npm run lint
 
-  prettoer:
+  prettier:
     executor: app-executor
     steps:
       - checkout
