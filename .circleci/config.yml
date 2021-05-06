@@ -70,8 +70,8 @@ jobs:
       - *show-current-branch-name
       - *restore-cache
       - run:
-          name: run prettier check
-          command: npm install npm run prettier --check 'src/**/*.{js,jsx,json}'
+          name: Run prettier check
+          command: npm install npm run prettier:check
           
   
   deploy-to-aws-s3:
