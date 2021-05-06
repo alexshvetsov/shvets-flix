@@ -14,7 +14,7 @@ aliases:
     run:
       name: Install dependencies
       command: npm install
-  - &save_cache
+  - &save-cache
     save_cache:
       paths:
         -node_modules
@@ -49,9 +49,9 @@ jobs:
     steps:
       - checkout
       - *show-current-branch-name
-      - *restore_cache
+      - *restore-cache
       - *install-dependencies
-      - *save_cache
+      - *save-cache
 
   linting:
     executor: app-executor
