@@ -60,7 +60,7 @@ jobs:
       - *show-current-branch-name
       - *restore-cache
       - run:
-          name: Run linting
+          name: run linting
           command: npm install npm run lint
   
   deploy-to-aws-s3:
