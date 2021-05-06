@@ -71,7 +71,7 @@ jobs:
       - *restore-cache
       - run:
           name: run prettier check
-          command: npm install npm run prettier --check src/**/*.{js,jsx,json}
+          command: npm install npm run prettier --check 'src/**/*.{js,jsx,json}'
           
   
   deploy-to-aws-s3:
