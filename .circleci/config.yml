@@ -71,7 +71,7 @@ jobs:
       - *restore-cache
       - run:
           name: run prettier check
-          command: npm install npm run prettierCheck
+          command: npm install npm run prettiercheck
           
   
   deploy-to-aws-s3:
