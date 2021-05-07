@@ -134,7 +134,7 @@ jobs:
           event: 'always'
           channel: 'shvetsov-flix-circleci'
           template: ''
-           custom: |
+            custom: |
               {
                 "blocks": [
                   {
