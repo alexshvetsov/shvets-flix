@@ -126,7 +126,7 @@ jobs:
     steps:
       - run: echo "app is good"
       
-  notify-via-slcak:
+  notify-via-slack:
     executor: slack-executor
     steps:
       - run: echo "slack notification"
