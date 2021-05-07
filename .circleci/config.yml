@@ -132,7 +132,7 @@ jobs:
       - run: echo "slack notification"
       - slack/notify: 
           event: 'always'
-          
+          chnnel: 'shvets-flix-circleci'
           template: ''
           custom: |
             {
@@ -189,52 +189,52 @@ jobs:
 workflows:
   build_and_deploy:
     jobs:
-      - test
-      - notify-via-slack:
+      - build
+      # - notify-via-slack:
+      #     requires:
+      #       - test
+      #     filters:
+      #       branches: 
+      #         only:
+      #           - develop
+      #           - staging
+      #           - master
+      - linting :
           requires:
-            - test
+            - build
           filters:
             branches: 
               only:
                 - develop
                 - staging
                 - master
-      # - linting :
-      #     requires:
-      #       - build
-      #     filters:
-      #       branches: 
-      #         only:
-      #           - develop
-      #           - staging
-      #           - master
-      # - prettier:
-      #     requires:
-      #       - build
-      #     filters:
-      #       branches: 
-      #         only:
-      #           - develop
-      #           - staging
-      #           - master
-      # - deploy-to-aws-s3:
-      #     requires:
-      #       - prettier
-      #     filters:
-      #       branches: 
-      #         only:
-      #           - develop
-      #           - staging
-      #           - master
-      # - deploy-to-aws-cloudfront:
-      #     requires:
-      #       - deploy-to-aws-s3
-      #     filters:
-      #       branches: 
-      #         only:
-      #           - develop
-      #           - staging
-      #           - master
+      - prettier:
+          requires:
+            - build
+          filters:
+            branches: 
+              only:
+                - develop
+                - staging
+                - master
+      - deploy-to-aws-s3:
+          requires:
+            - prettier
+          filters:
+            branches: 
+              only:
+                - develop
+                - staging
+                - master
+      - deploy-to-aws-cloudfront:
+          requires:
+            - deploy-to-aws-s3
+          filters:
+            branches: 
+              only:
+                - develop
+                - staging
+                - master
       # - notify-via-slack:
       #     requires:
       #       - deploy-to-aws-s3
