@@ -191,14 +191,14 @@ workflows:
     jobs:
       - test
       - notify-via-slack:
-        requires:
-          - test
-        filters:
-          branches: 
-            only:
-              - develop
-              - staging
-              - master
+          requires:
+            - test
+          filters:
+            branches: 
+              only:
+                - develop
+                - staging
+                - master
       # - linting :
       #     requires:
       #       - build
