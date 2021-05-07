@@ -124,7 +124,7 @@ jobs:
   test:
     executor: app-executor
     steps:
-      - run: echo "app is working"
+      - run: echo "app is good"
       
   notify-via-slack:
     executor: slack-executor
