@@ -132,7 +132,7 @@ jobs:
       - run: echo "slack notification"
       - slack/notify: 
           event: 'always'
-          channel: 'shvetsov-flix-circleci'
+          
           template: ''
           custom: |
             {
