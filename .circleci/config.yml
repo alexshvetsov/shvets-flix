@@ -136,7 +136,7 @@ jobs:
       - run:
           name: Deploy to AWS Cloudfront
           command: |
-          AWS_BUCKET_NAME=$(cat artifacts/shvets_bucket_name.txt | sed 's/\"//g')
+          AWS_BUCKET_NAME = $(cat artifacts/shvets_bucket_name.txt | sed 's/\"//g')
             if ["${CIRCLE_BRANCH}" === "master"]
             then
               aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_NAME} --delete
