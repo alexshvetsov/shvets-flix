@@ -1,14 +1,14 @@
 
 provider "aws" {
-  region     = "eu-west-2"
+  region = "eu-west-2"
 }
 
 terraform {
   backend "s3" {
-    bucket     = "app-shvets-tf-state"
-    key        = "app-shvets.tfstate"
-    region     = "eu-west-2"
-    encrypt    = true
+    bucket  = "app-shvets-tf-state"
+    key     = "app-shvets.tfstate"
+    region  = "eu-west-2"
+    encrypt = true
   }
 }
 
