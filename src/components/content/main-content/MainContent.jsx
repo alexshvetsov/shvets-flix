@@ -9,7 +9,7 @@ const MainContent = () => {
   const images = [
     {
       url: 'https://images.pexels.com/photos/688574/pexels-photo-688574.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-      rating: 5.5
+      rating: 2.5
     },
     {
       url: 'https://images.pexels.com/photos/688574/pexels-photo-688574.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
