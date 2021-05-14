@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../../assets/cinema-logo.svg';
+import { connect } from 'react-redux';
+import { getMovies, setMovieType, setResponsePageNumber } from '../../redux/actions/movies';
 import './Header.scss';
+import PropTypes from 'prop-types';
 
 const HEADER_LIST = [
   {
@@ -28,20 +31,35 @@ const HEADER_LIST = [
     type: 'upcoming'
   }
 ];
-const Header = () => {
+
+const Header = (props) => {
+  const { getMovies, setMovieType, page, totalPages, setResponsePageNumber } = props;
   let [navClass, setNavClass] = useState(false);
   let [menuClass, setMenuClass] = useState(false);
-  if (navClass) {
-    document.body.classList.add('header-nav-open');
-  } else {
-    document.body.classList.remove('header-nav-open');
-  }
+  const [type, setType] = useState('now_playing');
+
+  useEffect(() => {
+    getMovies(type, page);
+    setResponsePageNumber(page, totalPages);
+
+    // eslint-disable-next-line
+  }, [type]);
+
+  const setMovieTypeUrl = (type) => {
+    setType(type);
+    setMovieType(type);
+  };
 
   const toggleMenu = () => {
     menuClass = !menuClass;
     navClass = !navClass;
     setNavClass(navClass);
     setMenuClass(menuClass);
+    if (navClass) {
+      document.body.classList.add('header-nav-open');
+    } else {
+      document.body.classList.remove('header-nav-open');
+    }
   };
 
   return (
@@ -50,16 +68,16 @@ const Header = () => {
         <div className="header-bar"></div>
         <div className="header-navbar">
           <div className="header-image">
-            <img src={logo} alt="logo" />
+            <img src={logo} alt="" />
           </div>
-          <div id="header-mobile-menu" className={`${menuClass ? 'header-menu-toggle is-active' : 'header-menu-toggle'}`} onClick={() => toggleMenu()}>
+          <div className={`${menuClass ? 'header-menu-toggle is-active' : 'header-menu-toggle'}`} id="header-mobile-menu" onClick={() => toggleMenu()}>
             <span className="bar"></span>
             <span className="bar"></span>
             <span className="bar"></span>
           </div>
           <ul className={`${navClass ? 'header-nav header-mobile-nav' : 'header-nav'}`}>
             {HEADER_LIST.map((data) => (
-              <li key={data.id} className="header-nav-item">
+              <li key={data.id} className={data.type === type ? 'header-nav-item active-item' : 'header-nav-item'} onClick={() => setMovieTypeUrl(data.type)}>
                 <span className="header-list-name">
                   <i className={data.iconClass}></i>
                 </span>
@@ -67,7 +85,7 @@ const Header = () => {
                 <span className="header-list-name">{data.name}</span>
               </li>
             ))}
-            <input type="text" className="search-input" placeholder="search for a movie" />
+            <input className="search-input" type="text" placeholder="Search for a movie" />
           </ul>
         </div>
       </div>
@@ -75,4 +93,19 @@ const Header = () => {
   );
 };
 
-export default Header;
+Header.propTypes = {
+  getMovies: PropTypes.func,
+  setMovieType: PropTypes.func,
+  setResponsePageNumber: PropTypes.func,
+  // list: PropTypes.array,
+  page: PropTypes.number,
+  totalPages: PropTypes.number
+};
+
+const mapStateToProps = (state) => ({
+  // list: state.movies.list,
+  page: state.movies.page,
+  totalPages: state.movies.totalPages
+});
+
+export default connect(mapStateToProps, { getMovies, setMovieType, setResponsePageNumber })(Header);
