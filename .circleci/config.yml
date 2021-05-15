@@ -183,7 +183,7 @@ jobs:
   test:
     executor: app-executor
     steps:
-      - run: echo "app is good"
+      - run: echo "App is good"
       
   notify-via-slack:
     executor: slack-executor

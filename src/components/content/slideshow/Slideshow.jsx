@@ -6,8 +6,8 @@ import './Slideshow.scss';
 const Slideshow = (props) => {
   const { images, auto, showArrows } = props;
   const [state, setState] = useState({
-    slideShow: images[0],
-    slideIndex: 0
+    slideShow: images[1],
+    slideIndex: 1
   });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sliderInterval, setSliderInterval] = useState(0);
@@ -16,7 +16,12 @@ const Slideshow = (props) => {
   let currentSlideIndex = 0;
 
   useEffect(() => {
-    if (auto) {
+    setState(() => ({
+      ...state,
+      slideIndex: 0,
+      slideShow: images[0]
+    }));
+    if (auto && images.length) {
       const timeInterval = setInterval(() => {
         autoMoveSlide();
       }, 5000);
@@ -29,7 +34,7 @@ const Slideshow = (props) => {
     }
 
     // eslint-disable-next-line
-  }, []);
+  }, [images]);
 
   const autoMoveSlide = () => {
     let lastIndex = 0;
