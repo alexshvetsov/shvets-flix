@@ -33,7 +33,6 @@ const MainContent = (props) => {
     setResponsePageNumber(pageNumber, totalPages);
     getMovies(movieType, pageNumber);
   };
-
   useEffect(() => {
     if (randomMovies.length) {
       const IMAGES = [
