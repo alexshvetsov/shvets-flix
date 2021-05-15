@@ -4,14 +4,21 @@ import './App.scss';
 import Main from './components/main/Main.jsx';
 import Header from './components/header/Header';
 import store from './redux/store';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Details from './components/content/details/Details';
 
 const App = () => {
   return (
     <Provider store={store}>
-      <div className="app">
+      <Router>
         <Header />
-        <Main />
-      </div>
+        <div className="app">
+          <Switch>
+            <Route path="/" component={Main} exact />
+            <Route path="/:id/:name/details" component={Details} exact />
+          </Switch>
+        </div>
+      </Router>
     </Provider>
   );
 };
