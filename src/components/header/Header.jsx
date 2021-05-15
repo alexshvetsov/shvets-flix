@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getMovies, setMovieType, setResponsePageNumber, searchQuery, searchResult } from '../../redux/actions/movies';
 import './Header.scss';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 const HEADER_LIST = [
   {
@@ -39,6 +40,8 @@ const Header = (props) => {
   const [search, setSearch] = useState('');
   const [type, setType] = useState('now_playing');
 
+  const history = useHistory();
+
   useEffect(() => {
     getMovies(type, page);
     setResponsePageNumber(page, totalPages);
@@ -55,6 +58,11 @@ const Header = (props) => {
     setSearch(e.target.value);
     searchQuery(e.target.value);
     searchResult(e.target.value);
+  };
+
+  const navigateToHome = () => {
+    console.log('asdasd');
+    history.push('/');
   };
 
   const toggleMenu = () => {
@@ -74,7 +82,7 @@ const Header = (props) => {
       <div className="header-nav-wrapper">
         <div className="header-bar"></div>
         <div className="header-navbar">
-          <div className="header-image">
+          <div className="header-image" onClick={() => navigateToHome()}>
             <img src={logo} alt="" />
           </div>
           <div className={`${menuClass ? 'header-menu-toggle is-active' : 'header-menu-toggle'}`} id="header-mobile-menu" onClick={() => toggleMenu()}>
