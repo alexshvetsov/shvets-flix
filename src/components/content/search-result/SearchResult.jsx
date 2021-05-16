@@ -2,6 +2,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import './SearchResult.scss';
 import '../grid/Grid.scss';
@@ -18,6 +19,11 @@ const SearchResult = (props) => {
     setMovieData(searchResult);
   }, [searchResult]);
 
+  const formatMovieTitle = (title) => {
+    const titleStr = title.toLowerCase();
+    return titleStr.replace(/ /g, '-').replace('%', '*');
+  };
+
   return (
     <div className="searchKeyword">
       <div className="grid-search-title">
@@ -31,7 +37,9 @@ const SearchResult = (props) => {
             {data.poster_path && (
               <LazyImage className="grid-cell" src={`${IMAGE_URL}${data.poster_path}`}>
                 <div className="grid-read-more">
-                  <button className="grid-cell-button">Read More</button>
+                  <button className="grid-cell-button">
+                    <Link to={`/${data.id}/${formatMovieTitle(data.title)}/details`}>Read More</Link>
+                  </button>
                 </div>
                 <div className="grid-detail">
                   <span className="grid-detail-title">{data.title}</span>
