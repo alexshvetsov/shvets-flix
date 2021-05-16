@@ -312,8 +312,7 @@ workflows:
                 - master
       - terraform-validate:
           requires:
-            - linting
-            - prettier
+            - unit-test
           filters:
             branches: 
               only:
