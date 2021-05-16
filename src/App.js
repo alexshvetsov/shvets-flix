@@ -6,6 +6,7 @@ import Header from './components/header/Header';
 import store from './redux/store';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Details from './components/content/details/Details';
+import ErrorPage from './components/content/error/ErrorPage';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Switch>
             <Route path="/" component={Main} exact />
             <Route path="/:id/:name/details" component={Details} exact />
+            <Route path="*" component={ErrorPage} exact />
           </Switch>
         </div>
       </Router>
